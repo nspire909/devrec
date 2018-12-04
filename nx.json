@@ -1,0 +1,21 @@
+{
+  "npmScope": "devrec",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "devrec": {
+      "tags": []
+    },
+    "devrec-e2e": {
+      "tags": []
+    },
+    "common": {
+      "tags": []
+    }
+  }
+}

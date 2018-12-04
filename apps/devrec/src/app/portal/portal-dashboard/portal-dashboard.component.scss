@@ -1,0 +1,45 @@
+$card-size: 12rem;
+$card-padding: 1.5rem;
+$card-title-size: 1.4rem;
+$line-height: 1.5;
+$mat-card-header-text-margin: .5rem;
+$gap: 1rem;
+
+.portal-page {
+  margin: 0 auto;
+  padding: 2rem;
+  max-width: 1366px;
+}
+.portal-apps {
+  display: grid;
+  grid-gap: $gap;
+  grid-template-columns: repeat(auto-fill, minmax($card-size, 1fr));
+  margin-top: $gap;
+
+  .mat-card {
+    padding: 1rem;
+    height: $card-size * .85;
+    a {
+      text-decoration: none;
+    }
+    ::ng-deep .mat-card-header-text {
+      width: 100%;
+    }
+    .mat-card-title {
+      text-align: center;
+      height: ($card-title-size * $line-height * 2);
+      font-variant: small-caps;
+      font-size: $card-title-size;
+      line-height: $line-height;
+      text-decoration: none;
+    }
+    .mat-card-content {
+      text-align: center;
+      .mat-icon {
+        height: 5rem;
+        width: 5rem;
+        font-size: 5rem;
+      }
+    }
+  }
+}

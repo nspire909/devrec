@@ -1,0 +1,438 @@
+@import "~@angular/material/theming";
+
+@mixin shared-selected-row-background() {
+  .highlight-table-row {
+    background: #90caf9;
+  }
+}
+
+$lf-typography-config: mat-typography-config(
+  $font-family: 'Roboto, "Helvetica Neue", sans-serif',
+  $display-4: mat-typography-level(112px, 112px, 300),
+  $display-3: mat-typography-level(56px, 56px, 300),
+  $display-2: mat-typography-level(45px, 48px, 300),
+  $display-1: mat-typography-level(34px, 40px, 300),
+  $headline: mat-typography-level(24px, 32px, 400),
+  $title: mat-typography-level(20px, 32px, 500),
+  $subheading-2: mat-typography-level(16px, 28px, 400),
+  $subheading-1: mat-typography-level(15px, 24px, 400),
+  $body-2: mat-typography-level(14px, 24px, 500),
+  $body-1: mat-typography-level(14px, 20px, 400),
+  $caption: mat-typography-level(12px, 20px, 400),
+  $button: mat-typography-level(14px, 14px, 500),
+  $input: mat-typography-level(inherit, 1.125, 400)
+);
+
+@mixin shared-typography() {
+  @include angular-material-typography($lf-typography-config);
+
+  .bold,
+  strong {
+    font-weight: 700;
+  }
+  .uppercase {
+    text-transform: uppercase;
+  }
+  .capitalize {
+    text-transform: capitalize;
+  }
+  .inline-icon {
+    bottom: -0.4rem;
+    position: relative;
+  }
+}
+
+@mixin shared-expansion-panels {
+  mat-expansion-panel {
+    .mat-expansion-panel-header-title {
+      &.text-summary {
+        flex: 1;
+        min-width: 0;
+        label {
+          padding-right: 0.5rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+      & > label {
+        padding-top: .1875rem;
+        cursor: pointer;
+      }
+    }
+  }
+
+  @media (max-width: 640px), (max-height: 640px) {
+    mat-expansion-panel-header.mat-expansion-panel-header {
+      padding: 0 .625rem;
+
+      mat-panel-title {
+        margin-right: .375rem;
+      }
+    }
+  }
+}
+
+@mixin shared-forms {
+  form {
+    $field-height: 84px;
+    //SHARED SETTINGS - ALL BROWSERS
+    display: flex;
+    flex-direction: column; //this governs top-level only: the form's title, body and buttons.
+    .mat-card & .mat-card-actions[align="end"] {
+      margin: 0;
+      .mat-raised-button:last-child { //align buttons with right edge of form.
+        margin-right: 0;
+      }
+    }
+    .mat-form-field {
+      min-height: $field-height;
+      .mat-form-field-prefix, .mat-form-field-suffix {
+        align-self: center; //related to datepicker problem on Edge and IE.
+        & > .mat-icon {
+          position: relative;
+          top: 0;
+        }
+      }
+    }
+    .mat-radio-group, .checkbox-container {
+      flex-wrap: wrap;
+      min-height: 52px;
+      align-items: baseline;
+      align-content: flex-start;
+      margin-top: 0;
+      margin-bottom: 32px;
+      &[style*='flex-direction: row'] {
+        align-items: center;
+        padding-bottom: 2px;
+      }
+    }
+    .mat-radio-button, .mat-checkbox {
+      margin-right: 16px;
+    }
+    .mat-radio-button {
+      padding-top: .25rem;
+    }
+    .mat-checkbox {
+      padding: 0;
+    }
+
+    //IE10+ SETTINGS
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      .mat-select {
+        height: 15px;
+        margin-bottom: 1px;
+      }
+      textarea.mat-input-element {
+        margin: -2px 0 !important;
+        padding: 1px 0 !important;
+      }
+      .checkbox-container, .mat-radio-group {
+        align-items: flex-start;
+        &[style*='flex-direction: row'] {
+          height: 52px;
+          align-items: center;
+          padding-bottom: 2px;
+        }
+      }
+      .mat-form-field .mat-form-field-prefix, .mat-form-field .mat-form-field-suffix {
+        align-self: center; //fixes datepicker problem on IE
+        & .mat-icon {
+          top: 0;
+        }
+      }
+    }
+    //EDGE SETTINGS
+    @supports (-ms-ime-align: auto) {
+      .checkbox-container, .mat-radio-group {
+        align-content: center;
+        margin-top: 1px;
+        padding-bottom: .5rem;
+        &[style*='flex-direction: row'] {
+          .mat-checkbox, .mat-radio-button {
+            align-self: center;
+          }
+        }
+      }
+      .mat-form-field .mat-form-field-prefix, .mat-form-field .mat-form-field-suffix {
+        align-self: center; //fixes datepicker problem on Edge
+        & .mat-icon {
+          top: 0;
+        }
+      }
+    }
+  }
+}
+
+// HTML Table base spacing (from Material Table Sass)
+%mat-header-row {height: 56px;}
+%mat-footer-row, %mat-row {height: 48px;}
+%mat-header-cell {text-align: left; font-size:12px;}
+//TODO why do we add padding when material doesn't??
+//   https://github.com/angular/material2/blob/master/src/lib/table/table.scss#L89
+%base-cell {padding:12px 12px 12px 0;border-bottom: 1px solid;}
+%cell-first-child {padding-left: 24px}
+%cell-last-child {padding-right: 24px}
+
+@mixin material-table() {
+    table.material:not(.mat-table) {
+      //IE/Edge hide box-shadows when border-collapse: collapse
+      //Currently a WONTFIX https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/1349570/
+      //border-collapse: collapse;
+      border-spacing: 0;
+
+      >thead>tr, >thead>.mat-header-row {
+        @extend %mat-header-row;
+        >th {
+          @extend %base-cell;
+          @extend %mat-header-cell;
+          &:first-of-type {
+            @extend %cell-first-child;
+          }
+          &:last-of-type {
+            @extend %cell-last-child;
+          }
+        }
+      }
+      >tbody>tr {
+        @extend %mat-row;
+        >td {
+          @extend %base-cell;
+          &:first-of-type {
+            @extend %cell-first-child;
+          }
+          &:last-of-type {
+            @extend %cell-last-child;
+          }
+        }
+      }
+      >tfoot>tr {
+        @extend %mat-footer-row;
+        >td {
+          @extend %base-cell;
+          &:first-of-type {
+            @extend %cell-first-child;
+          }
+          &:last-of-type {
+            @extend %cell-last-child;
+          }
+        }
+      }
+      &.compact {
+        >thead>tr, >tbody>tr, >tfoot>tr {
+          min-height: 28px;
+          height: 28px;
+          vertical-align: middle;
+          >td, >th {
+            padding-top: inherit; padding-bottom: inherit;
+          }
+        }
+      }
+    }
+
+  .mat-table {
+    //align-items: center not working in IE
+    //https://github.com/angular/material2/issues/11470
+    //TODO remove once issue is fixed
+    mat-cell, mat-header-cell, mat-footer-cell {
+      // In some cases `align-items` won't work on something with a `min-height`. This is a workaround
+      // to get centering to work. This can also be fixed by setting the height of the cell to something
+      // less than the `min-height`, however this approach is less prone to breaking if we decide to
+      // remove the `min-height`.
+      &::after {
+        content: '';
+        font-size: 0;
+        min-height: inherit;
+      }
+    }
+  }
+
+  .mat-table.compact {
+    .mat-header-row, .mat-footer-row, .mat-row {
+      min-height: 28px;
+      height: 28px;
+      vertical-align: middle;
+    }
+  }
+}
+@mixin material-table-theme($theme) {
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  table.material:not(.mat-table) {
+    color: mat-color($foreground, text);
+    background: mat-color($background, 'card');
+    > tbody > tr, tbody > tr > td, thead > tr, thead > tr > th, tfoot > tr, tfoot > tr > td {
+      border-bottom: 1px mat-color($foreground, divider) solid;
+    }
+    > tbody > tr > td, > tfoot > tr > td {
+      color: mat-color($foreground, text);
+    }
+    > thead > tr > th {
+      color: mat-color($foreground, secondary-text);
+      font-weight: lighter;
+    }
+  }
+}
+
+@mixin shared-cards {
+  form .mat-card-actions {
+    padding-right: 0px;
+    padding-bottom: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+  }
+
+  .mat-card-actions button:last-child {
+    margin-right: 0px;
+  }
+
+  .mat-card-title {
+    .spacer {
+      flex: 1;
+    }
+    .mat-form-field {
+      margin-bottom: -17.5px;
+      font-size: 14px;
+    }
+    .mat-icon-button {
+      margin-bottom: -10px;
+    }
+  }
+}
+
+@mixin shared-tables {
+  .mat-row.selectable {
+    cursor: pointer;
+  }
+}
+
+@mixin shared-sidenav {
+  ia-layout-nav .mat-sidenav .mat-nav-list .mat-subheader {
+    border: none;
+    letter-spacing: 1px;
+    line-height: 24px;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin: 0;
+    padding: 0 16px;
+    height: auto;
+  }
+  // ia-layout-nav .mat-sidenav {
+  //   width: 350px;
+  // }
+  .app-sidenav-container {
+    height: 100%;
+    width: 100%;
+  }
+  .mat-sidenav .mat-nav-list .mat-subheader {
+    border: none;
+    letter-spacing: 1px;
+    line-height: 24px;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin: 0;
+    padding: 0 16px;
+    height: auto;
+  }
+}
+
+@mixin shared-layouts() {
+  .menu-bar {
+    box-sizing: border-box;
+    padding-left: 3.5rem;
+    a {
+      box-sizing: inherit;
+      display: inline-block;
+      position: relative;
+      height: 100%;
+      padding: 1rem;
+      text-decoration: none;
+      &::first-child {
+        margin-left: 1.2rem;
+      }
+    }
+  }
+  .container {
+    margin: 1rem auto;
+  }
+  .toolbar-spacer {
+    flex: 1 1 auto;
+  }
+}
+
+@mixin shared-print() {
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+    .print-only {
+      display: block;
+    }
+  }
+
+  @media screen {
+    .print-only {
+      display: none;
+    }
+  }
+}
+
+@mixin nav-title-width() {
+  .nav-title {
+    margin: auto;
+    width: $content-width + ($hamburger-width / 2) + 16px;
+    padding-right: $hamburger-width;
+  }
+  .nav-title-spacer {
+    width: 0;
+    display: block;
+    transition: all 0.2s linear 50ms;
+  }
+  .nav-title-spacer.enabled {
+    width: $sidenav-width - 50px;
+    flex: 1 1 100%;
+    box-sizing: border-box;
+    max-width: 10%;
+  }
+}
+
+@mixin shared-toolbar() {
+  .mat-toolbar.main-toolbar {
+    & .logo {
+      height: 52px;
+      margin-left: 1rem;
+    }
+    a, .mat-icon-button, .toolbar-title {
+      text-decoration: none;
+    }
+  }
+  .mat-toolbar-row .avatar {
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .mat-toolbar-row .avatar img {
+    height: 40px;
+  }
+  .mat-toolbar-row .toolbar-title {
+    font-size: 1.6rem;
+    align-self: center;
+  }
+}
+
+
+@mixin shared-core() {
+  @include shared-print();
+  @include shared-typography();
+  @include shared-expansion-panels();
+  @include shared-forms();
+  @include material-table();
+  @include shared-cards();
+  @include shared-tables();
+  @include shared-sidenav();
+  @include shared-layouts();
+  @include shared-selected-row-background();
+  @include nav-title-width();
+  @include shared-toolbar();
+}

@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+@import './app/app.theme'; //this is the only spot this can be imported!
+
+html {
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+body {
+  margin: 0;
+  min-width: 360px;
+}
+
+//Allow print view to work on IE/Edge w/ flex layout
+@media print {
+  .layout-fill, etg-lf-layout-nav {
+    display: block !important;
+  }
+}

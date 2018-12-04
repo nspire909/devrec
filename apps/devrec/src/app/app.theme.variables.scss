@@ -1,0 +1,43 @@
+$mat-eagle-blue: (
+  50 : #e2e9f4,
+  100 : #b6c8e3,
+  200 : #86a3d0,
+  300 : #567ebd,
+  400 : #3163af,
+  500 : #0d47a1,
+  600 : #0b4099,
+  700 : #09378f,
+  800 : #072f85,
+  900 : #032074,
+  A100 : #a2b4ff,
+  A200 : #6f8aff,
+  A400 : #3c61ff,
+  A700 : #234cff, contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+$main-app-primary: mat-palette($mat-eagle-blue, 500, 300, 700);
+$main-app-accent: mat-palette($mat-orange, 500, 300, 700);
+$app-warn: mat-palette($mat-red);
+$app-submit: mat-palette($mat-green);
+
+$main-app-theme: mat-light-theme($main-app-primary, $main-app-accent, $app-warn);
+$main-app-dark-theme: mat-dark-theme($main-app-primary, $main-app-accent, $app-warn);
+
+$content-width: 1080px;
+$hamburger-width: 40px;
+$sidenav-width: 350px;

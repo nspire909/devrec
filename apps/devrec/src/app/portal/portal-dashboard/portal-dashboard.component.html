@@ -1,0 +1,20 @@
+<div class="portal-page">
+  <portal-announcements></portal-announcements>
+  <div class="portal-apps">
+    <mat-card [ngClass]="card.active ? 'active' : 'disabled'" *ngFor="let card of dashboardCards">
+      <a [routerLink]="card.path">
+        <ng-content *ngTemplateOutlet="cardContent"></ng-content>
+      </a>
+      <ng-template #cardContent>
+        <mat-card-header>
+          <mat-card-title>
+            <div>{{card.title}}</div>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <mat-icon>{{card.icon}}</mat-icon>
+        </mat-card-content>
+      </ng-template>
+    </mat-card>
+  </div>
+</div>

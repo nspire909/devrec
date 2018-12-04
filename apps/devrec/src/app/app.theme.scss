@@ -1,0 +1,78 @@
+﻿@import '~@angular/material/theming';
+@import './app.theme.variables';
+@import '~@devrec/common/shared-mixins';
+@import '~@devrec/common/layout';
+
+@include mat-core();
+@include shared-core();
+
+// Colors only, please, in the app-theme mixin
+@mixin app-theme($theme, $dark-theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $contrast: map-get($primary, contrast);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  @include angular-material-theme($theme);
+  @include material-table-theme($theme);
+
+  //https://material.io/guidelines/components/data-tables.html#data-tables-structure
+  .mat-row.selectable:hover {
+    background-color: mat-color($background, 'hover');
+  }
+
+  .mat-menu-item.normal-color[disabled] {
+    color: mat-color($foreground, 'text');
+  }
+
+  &.dark-theme {
+    @include angular-material-theme($dark-theme);
+  }
+}
+
+@mixin main-toolbar-theme($theme, $dark-theme) {
+  $primary: map-get($theme, primary);
+  $contrast: map-get($primary, contrast);
+
+  .mat-toolbar.main-toolbar {
+    background: mat-color($primary, 500);
+    a, .mat-icon-button, .toolbar-title {
+      color: mat-color($contrast, 500);
+      &.selected {
+        background-color: mat-color($primary, 400);
+      }
+    }
+  }
+}
+
+@mixin portal-card-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $contrast: map-get($primary, contrast);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .portal-apps {
+    .mat-card {
+      &:hover:not(.disabled) {
+        background: mat-color($primary, 50);
+      }
+      .mat-card-title>*, .mat-card-content .mat-icon {
+        color: mat-color($primary, 500);
+        fill: mat-color($primary, 500);
+      }
+      &.disabled .mat-card-title>p, &.disabled .mat-card-content .mat-icon {
+        color: mat-color($primary, 300);
+        fill: mat-color($primary, 300);
+        opacity: .3;
+      }
+    }
+  }
+}
+
+@include app-theme($main-app-theme, $main-app-dark-theme);
+@include main-toolbar-theme($main-app-theme, $main-app-dark-theme);
+@include portal-card-theme($main-app-theme);
