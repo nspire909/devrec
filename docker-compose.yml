@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  mobtimer.api:
+    image: ${DOCKER_REGISTRY-}mobtimerapi
+    build:
+      context: .
+      dockerfile: apps\MobTimer.Api\Dockerfile
