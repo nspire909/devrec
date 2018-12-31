@@ -171,6 +171,388 @@
           }
         }
       }
+    },
+    "auth": {
+      "root": "libs/auth",
+      "sourceRoot": "libs/auth/src",
+      "projectType": "library",
+      "prefix": "devrec",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/auth/src/test.ts",
+            "tsConfig": "libs/auth/tsconfig.spec.json",
+            "karmaConfig": "libs/auth/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/auth/tsconfig.lib.json",
+              "libs/auth/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "error": {
+      "root": "libs/error",
+      "sourceRoot": "libs/error/src",
+      "projectType": "library",
+      "prefix": "devrec",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/error/src/test.ts",
+            "tsConfig": "libs/error/tsconfig.spec.json",
+            "karmaConfig": "libs/error/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/error/tsconfig.lib.json",
+              "libs/error/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ng-timer-docs": {
+      "root": "apps/ng-timer-docs/",
+      "sourceRoot": "apps/ng-timer-docs/src",
+      "projectType": "application",
+      "prefix": "devrec",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/ng-timer-docs",
+            "index": "apps/ng-timer-docs/src/index.html",
+            "main": "apps/ng-timer-docs/src/main.ts",
+            "polyfills": "apps/ng-timer-docs/src/polyfills.ts",
+            "tsConfig": "apps/ng-timer-docs/tsconfig.app.json",
+            "assets": [
+              "apps/ng-timer-docs/src/favicon.ico",
+              "apps/ng-timer-docs/src/assets"
+            ],
+            "styles": [
+              "apps/ng-timer-docs/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/ng-timer-docs/src/environments/environment.ts",
+                  "with": "apps/ng-timer-docs/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ],
+              "baseHref": "/ng-timer/"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ng-timer-docs:build",
+            "port": 5001,
+            "open": true
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ng-timer-docs:build:production",
+              "port": 5002
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ng-timer-docs:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/ng-timer-docs/src/test.ts",
+            "polyfills": "apps/ng-timer-docs/src/polyfills.ts",
+            "tsConfig": "apps/ng-timer-docs/tsconfig.spec.json",
+            "karmaConfig": "apps/ng-timer-docs/karma.conf.js",
+            "styles": [
+              "apps/ng-timer-docs/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "apps/ng-timer-docs/src/favicon.ico",
+              "apps/ng-timer-docs/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/ng-timer-docs/tsconfig.app.json",
+              "apps/ng-timer-docs/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ng-timer-docs-e2e": {
+      "root": "apps/ng-timer-docs-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/ng-timer-docs-e2e/protractor.conf.js",
+            "devServerTarget": "ng-timer-docs:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ng-timer-docs:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/ng-timer-docs-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ng-timer": {
+      "root": "libs/ng-timer",
+      "sourceRoot": "libs/ng-timer/src",
+      "projectType": "library",
+      "prefix": "devrec",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/ng-timer/tsconfig.lib.json",
+            "project": "libs/ng-timer/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/ng-timer/src/test.ts",
+            "tsConfig": "libs/ng-timer/tsconfig.spec.json",
+            "karmaConfig": "libs/ng-timer/karma.conf.js",
+            "watch": false
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ng-timer/tsconfig.lib.json",
+              "libs/ng-timer/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "mob-timer": {
+      "root": "apps/mob-timer/",
+      "sourceRoot": "apps/mob-timer/src",
+      "projectType": "application",
+      "prefix": "devrec",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/mob-timer",
+            "index": "apps/mob-timer/src/index.html",
+            "main": "apps/mob-timer/src/main.ts",
+            "polyfills": "apps/mob-timer/src/polyfills.ts",
+            "tsConfig": "apps/mob-timer/tsconfig.app.json",
+            "assets": [
+              "apps/mob-timer/src/favicon.ico",
+              "apps/mob-timer/src/assets"
+            ],
+            "styles": [
+              "apps/mob-timer/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/mob-timer/src/environments/environment.ts",
+                  "with": "apps/mob-timer/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "mob-timer:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "mob-timer:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "mob-timer:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/mob-timer/src/test.ts",
+            "polyfills": "apps/mob-timer/src/polyfills.ts",
+            "tsConfig": "apps/mob-timer/tsconfig.spec.json",
+            "karmaConfig": "apps/mob-timer/karma.conf.js",
+            "styles": [
+              "apps/mob-timer/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "apps/mob-timer/src/favicon.ico",
+              "apps/mob-timer/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/mob-timer/tsconfig.app.json",
+              "apps/mob-timer/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "mob-timer-e2e": {
+      "root": "apps/mob-timer-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/mob-timer-e2e/protractor.conf.js",
+            "devServerTarget": "mob-timer:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "mob-timer:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/mob-timer-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "MobTimer.Api": {
+      "root": "apps/MobTimer.Api/",
+      "sourceRoot": "apps/MobTimer.Api/src",
+      "projectType": "application",
+      "prefix": "devrec",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.json"
+            ],
+            "exclude": [
+              "**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "devrec",

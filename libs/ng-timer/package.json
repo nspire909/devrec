@@ -1,0 +1,35 @@
+{
+  "name": "@devrec/ng-timer",
+  "description": "Angular timer using rxjs",
+  "version": "0.0.18",
+  "scripts": {
+    "postversion": "yarn --cwd ../.. run build:ng-timer && yarn publish ../../dist/libs/ng-timer --access public --tag latest --non-interactive && echo \"Successfully released version %npm_package_version%!\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nspire909/ng-timer.git"
+  },
+  "keywords": [
+    "angular",
+    "ng",
+    "rxjs",
+    "timer"
+  ],
+  "author": {
+    "name": "Nick Marks",
+    "email": "nspire909@gmail.com",
+    "url": "https://github.com/nspire909"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nspire909/ng-timer/issues"
+  },
+  "homepage": "https://github.com/nspire909/ng-timer",
+  "peerDependencies": {
+    "@angular/cdk": "^7.0.0",
+    "@angular/common": "^7.0.0",
+    "@angular/core": "^7.0.0",
+    "@angular/forms": "^7.0.0",
+    "@angular/material": "^7.0.0"
+  }
+}

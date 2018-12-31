@@ -5,7 +5,6 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "module": "es2015",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -24,6 +23,15 @@
       ],
       "@devrec/common": [
         "libs/common/src/index.ts"
+      ],
+      "@devrec/auth": [
+        "libs/auth/src/index.ts"
+      ],
+      "@devrec/error": [
+        "libs/error/src/index.ts"
+      ],
+      "@devrec/ng-timer": [
+        "libs/ng-timer/src/index.ts"
       ]
     }
   }

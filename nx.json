@@ -16,6 +16,30 @@
     },
     "common": {
       "tags": []
+    },
+    "auth": {
+      "tags": []
+    },
+    "error": {
+      "tags": []
+    },
+    "ng-timer-docs": {
+      "tags": []
+    },
+    "ng-timer-docs-e2e": {
+      "tags": []
+    },
+    "ng-timer": {
+      "tags": []
+    },
+    "mob-timer": {
+      "tags": []
+    },
+    "mob-timer-e2e": {
+      "tags": []
+    },
+    "MobTimer.Api": {
+      "tags": []
     }
   }
 }

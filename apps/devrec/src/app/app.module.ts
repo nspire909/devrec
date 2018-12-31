@@ -13,11 +13,16 @@ import {
   SnapIsoStringMatDateAdapter,
   snapMatDateFormats,
   ENVIRONMENT_SETTINGS,
+  appReducers,
+  appMetaReducers,
 } from '@devrec/common';
+import { ALLOWED_ACTIONS_ROLE_MAP, JwtInterceptor, AuthModule } from '@devrec/auth';
+import { AppErrorHandler, ErrorModule } from '@devrec/error';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
+import { ROUTE_ACTIONS_TO_ROLE_MAP } from './app-actions-role-map';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,17 +31,19 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     HttpClientModule,
     CommonModule,
+    AuthModule,
+    ErrorModule,
     AppRoutingModule,
-    // StoreModule.forRoot(appReducers, { metaReducers: appMetaReducers }),
-    // EffectsModule.forRoot([]),
-    // StoreRouterConnectingModule,
-    // !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 50 }) : [],
+    StoreModule.forRoot(appReducers, { metaReducers: appMetaReducers }),
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule,
+    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 50 }) : [],
   ],
   providers: [
-    // { provide: ALLOWED_ACTIONS_ROLE_MAP, useValue: ROUTE_ACTIONS_TO_ROLE_MAP },
-    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: ALLOWED_ACTIONS_ROLE_MAP, useValue: ROUTE_ACTIONS_TO_ROLE_MAP },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'} },
-    // { provide: ErrorHandler, useClass: AppErrorHandler },
+    { provide: ErrorHandler, useClass: AppErrorHandler },
     { provide: MAT_DATE_FORMATS, useValue: snapMatDateFormats('DD-MMM-YYYY') },
     { provide: DateAdapter, useClass: SnapIsoStringMatDateAdapter },
     { provide: ENVIRONMENT_SETTINGS, useValue: environment }

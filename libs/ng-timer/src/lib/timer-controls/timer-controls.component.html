@@ -1,0 +1,20 @@
+<span *ngIf="timer">
+  <button mat-icon-button *ngIf="!(timer.timer$ | async)" (click)="startTimer()">
+    <mat-icon>play_arrow</mat-icon>
+  </button>
+  <span *ngIf="timer.timer$ | async">
+    <button mat-icon-button (click)="toggleTimer()">
+      <mat-icon>{{(timer.pause$ | async) ? 'play_arrow' : 'pause'}}</mat-icon>
+    </button>
+    <ng-content></ng-content>
+    <button mat-icon-button (click)="stopTimer()">
+      <mat-icon>stop</mat-icon>
+    </button>
+    <button mat-icon-button (click)="startTimer()">
+      <mat-icon>replay</mat-icon>
+    </button>
+  </span>
+  <button mat-button *ngIf="timer.timer$ | async" (click)="timerService.addTime(name, 30000)">
+    Add 30 seconds
+  </button>
+</span>

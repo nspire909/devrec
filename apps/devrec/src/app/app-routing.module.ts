@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppLayoutComponent } from '@devrec/common';
+import { AuthGuard } from '@devrec/auth';
 
 const routes: Routes = [
   {
@@ -14,7 +15,7 @@ const routes: Routes = [
           id: 'portal',
         },
         loadChildren: 'apps/devrec/src/app/portal/portal.module#PortalModule',
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
       },
     ],
   },

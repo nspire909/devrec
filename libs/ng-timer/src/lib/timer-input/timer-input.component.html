@@ -1,0 +1,22 @@
+<form #form="ngForm" *ngIf="timer">
+  <mat-form-field *ngIf="showStartTime">
+    <input matInput type="number" required [(ngModel)]="timer.startTime" name="startTime" placeholder="Start Time">
+    <span matSuffix>{{timer.units}}</span>
+  </mat-form-field>
+  <mat-form-field *ngIf="showUnits">
+    <mat-select [(ngModel)]="timer.units" name="units" placeholder="Units">
+      <mat-option *ngFor="let unitType of unitTypes" [value]="unitType.value">
+        {{ unitType.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="showTimeFormat">
+    <mat-select [(ngModel)]="timer.timeFormat" name="timeFormat" placeholder="Time Format">
+      <mat-option *ngFor="let tf of timeFormats" [value]="tf">
+        {{ tf }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-checkbox *ngIf="showCountdown" [(ngModel)]="timer.countdown" name="countdown">Countdown</mat-checkbox>
+  <mat-checkbox *ngIf="showAutostart" [(ngModel)]="timer.autostart" name="autostart">Auto Start</mat-checkbox>
+</form>

@@ -1,0 +1,10 @@
+<div class="container" [ngClass]="isDarkTheme ? 'dark-theme' : ''">
+  <mat-toolbar color="primary" fxLayoutAlign="space-between center">
+    <div>Timer</div>
+    <span>Dark Theme&nbsp;&nbsp;<mat-checkbox [(ngModel)]="isDarkTheme"></mat-checkbox></span>
+  </mat-toolbar>
+  <div class="page-content" fxLayout="column" fxLayoutGap="1rem">
+    <app-example [name]="timer1" [timeFcn]="timeFcn"></app-example>
+    <app-example [name]="timer2" [timeFcn]="timeFcn"></app-example>
+  <div>
+<div>
