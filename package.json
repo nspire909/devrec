@@ -27,15 +27,14 @@
     "ngh:mob": "ngh --dir=dist/mob-timer",
     "deploy:mob": "run-s \"build mob-timer --prod\" ngh:mob",
     "review": "run-s lint test e2e",
-    "publish": "yarn version --patch && yarn --cwd libs/ng-timer version --patch --no-git-tag-version",
+    "publish": "yarn version --patch && yarn --cwd libs/ng-timer version --patch --no-git-tag-version && git push --tags && git push",
     "build:ng-timer": "run-s \"utilities uv\" \"build ng-timer --prod\" \"utilities ca\"",
     "build:ng-timer-docs": "run-s \"build ng-timer-docs --prod\"",
     "update-version": "run-s \"utilities uv\"",
     "utilities": "ts-node --project tsconfig.json --files tools/cli.ts",
     "ngh": "ngh --dir=dist/ng-timer-docs",
     "deploy": "run-s build:ng-timer-docs ngh",
-    "postinstall": "run-s \"utilities uv\"",
-    "postversion": "git push --tags && git push"
+    "postinstall": "run-s \"utilities uv\""
   },
   "husky": {
     "hooks": {
